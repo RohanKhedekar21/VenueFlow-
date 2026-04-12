@@ -1,28 +1,26 @@
-# Stage 1: Build the Vite Frontend
-FROM node:18-alpine AS frontend-builder
-WORKDIR /app/frontend
-COPY frontend/package*.json ./
-RUN npm install
-COPY frontend .
-RUN npm run build
-
-# Stage 2: Create the Backend Production Environment
-FROM node:18-alpine
+# Stage 1: Build the React frontend
+FROM node:20 AS build-env
 WORKDIR /app
 
-# Copy and install backend dependencies
+# Copy and install frontend dependencies
+COPY frontend/package*.json ./frontend/
+RUN cd frontend && npm install
+
+# Copy frontend source and build
+COPY frontend/ ./frontend/
+RUN cd frontend && npm run build
+
+# Stage 2: Setup the Node.js backend
+FROM node:20-slim
+WORKDIR /app
+
+# Copy backend dependencies and install
 COPY backend/package*.json ./backend/
-RUN cd backend && npm install --production
+RUN cd backend && npm install --only=production
 
-# Copy backend source
+# Copy backend source and the built frontend from Stage 1
 COPY backend/ ./backend/
+COPY --from=build-env /app/frontend/dist ./frontend/dist
 
-# Copy the built Vite assets from Stage 1 into the location expected by backend
-COPY --from=frontend-builder /app/frontend/dist ./frontend/dist
-
-# Expose Cloud Run default port
 EXPOSE 8080
-
-# Start Server
-WORKDIR /app/backend
-CMD ["node", "server.js"]
+CMD ["node", "backend/server.js"]
