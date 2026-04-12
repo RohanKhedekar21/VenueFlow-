@@ -21,7 +21,7 @@ function App() {
 
   useEffect(() => {
     // Fetch static layout first
-    fetch('http://localhost:3001/api/venue')
+    fetch('/api/venue')
       .then(res => res.json())
       .then(layout => setVenueLayout(layout))
       .catch(err => console.error("Error fetching layout:", err));

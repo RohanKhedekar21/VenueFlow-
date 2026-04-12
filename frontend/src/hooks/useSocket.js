@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 
-const SOCKET_URL = 'http://localhost:3001';
+// Empty string defaults to window.location (relative)
+const SOCKET_URL = '';
 
 export const useSocket = () => {
   const [data, setData] = useState({ crowdData: {}, waitTimes: {} });
