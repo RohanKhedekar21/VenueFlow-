@@ -87,6 +87,10 @@ io.on('connection', (socket) => {
 });
 
 const PORT = process.env.PORT || 8080;
-server.listen(PORT, '0.0.0.0', () => {
-  console.log(`Backend server listening on port ${PORT}`);
-});
+if (require.main === module) {
+  server.listen(PORT, '0.0.0.0', () => {
+    console.log(`Backend server listening on port ${PORT}`);
+  });
+}
+
+module.exports = { app, server, io, crowdData, waitTimes };
