@@ -17,6 +17,10 @@ We approached this problem by treating the physical venue as a dynamic data syst
 3. **UI Representation**: `Map.jsx` interprets stadium zones dynamically. `AmenitiesList.jsx` aggregates queue times logically so the user can easily find the quickest bathroom. 
 4. **Google Maps Integration**: The system renders a `ParkingMap` using the Google Maps platform to give users visibility into the exterior stadium parameters, solving the "first mile" connection to the physical venue.
 
+## Testing & Stability
+To guarantee stable routing logic under load, VenueFlow utilizes **Vitest** + **React Testing Library** for component unit testing. 
+- The test suite rigorously validates our mathematical dynamic congestion logic, ensuring the `ParkingMap` properly switches to `Gate B` immediately when `Gate A` density structurally exceeds the threshold. Use `npm run test` strictly to trigger the test suite inside the frontend.
+
 ## Accessibility & Inclusive Design
 VenueFlow is built to be usable by everyone, particularly addressing the chaos of physical venues. We meet accessibility standards through the following implementations:
 - **WCAG High-Contrast Toggle**: Users can enable "Accessibility Mode" with a single click, instantly transforming the vibrant UI into an ultra-high contrast, black-on-white schematic.
