@@ -23,4 +23,4 @@ COPY backend/ ./backend/
 COPY --from=build-env /app/frontend/dist ./frontend/dist
 
 EXPOSE 8080
-CMD ["node", "backend/server.js"]
+CMD ["node", "backend/src/index.js"]

@@ -1,7 +1,8 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import request from 'supertest';
 import { io as Client } from 'socket.io-client';
-import { app, server } from './server';
+import app from './src/app';
+import { server } from './src/index';
 
 describe('Backend Server Reliability Tests', () => {
   let ioClient;
