@@ -3,10 +3,10 @@ import { useSocket } from './hooks/useSocket';
 import Map from './components/Map';
 import AmenitiesList from './components/AmenitiesList';
 import ParkingMap from './components/ParkingMap';
-import { Activity, Eye } from 'lucide-react';
+import { Activity, Eye, Zap } from 'lucide-react';
 
 function App() {
-  const { data, isConnected } = useSocket();
+  const { data, insight, isConnected } = useSocket();
   const [venueLayout, setVenueLayout] = useState(null);
   const [isAccessible, setIsAccessible] = useState(false);
 
@@ -51,6 +51,13 @@ function App() {
           )}
         </div>
       </header>
+
+      {insight && (
+        <div className="insight-banner" style={{ background: 'rgba(56, 189, 248, 0.15)', border: '1px solid #38bdf8', padding: '12px 20px', borderRadius: '12px', margin: '20px 20px -10px 20px', display: 'flex', alignItems: 'center', gap: '10px', backdropFilter: 'blur(10px)' }}>
+          <Zap size={20} color="#38bdf8" />
+          <span style={{ color: 'var(--text-color)', fontWeight: '500' }}>{insight}</span>
+        </div>
+      )}
 
       <main className="dashboard-grid">
         <div className="main-content">
