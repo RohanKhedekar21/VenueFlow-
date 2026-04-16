@@ -32,11 +32,13 @@ describe('Backend Server Reliability Tests', () => {
 
   it('pushes real-time queue states via WebSockets', async () => {
     return new Promise((resolve) => {
-      ioClient.on('venueUpdate', (data) => {
-        expect(data).toHaveProperty('crowdData');
-        expect(data).toHaveProperty('waitTimes');
-        expect(data.crowdData).toHaveProperty('gate-a');
-        expect(data.waitTimes).toHaveProperty('food-1');
+      ioClient.on('venueUpdate', (envelope) => {
+        expect(envelope).toHaveProperty('data');
+        expect(envelope).toHaveProperty('signature');
+        expect(envelope.data).toHaveProperty('crowdData');
+        expect(envelope.data).toHaveProperty('waitTimes');
+        expect(envelope.data.crowdData).toHaveProperty('gate-a');
+        expect(envelope.data.waitTimes).toHaveProperty('food-1');
         resolve();
       });
     });
