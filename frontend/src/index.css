@@ -266,3 +266,49 @@ body.accessible-mode h4 {
   background: #e2e8f0;
 }
 
+/* Security Integrity Layer */
+.security-alert-bar {
+  background: #ef4444;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 2rem;
+  font-weight: 700;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(239, 68, 68, 0.4);
+  animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+  border: 2px solid #b91c1c;
+}
+
+.security-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid transparent;
+}
+
+.security-badge.safe {
+  background: #f0fdf4;
+  color: #16a34a;
+  border-color: #bbf7d0;
+}
+
+.security-badge.compromised {
+  background: #fef2f2;
+  color: #dc2626;
+  border-color: #fecaca;
+  animation: pulse 1s infinite;
+}
+
+@keyframes shake {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+  40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
+

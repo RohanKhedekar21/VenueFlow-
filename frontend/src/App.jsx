@@ -7,7 +7,7 @@ import ParkingMap from './components/ParkingMap';
 import { Activity, Eye } from 'lucide-react';
 
 function App() {
-  const { data, isConnected } = useSocket();
+  const { data, isConnected, isSecure } = useSocket();
   const [venueLayout, setVenueLayout] = useState(null);
   const [isAccessible, setIsAccessible] = useState(false);
 
@@ -28,12 +28,21 @@ function App() {
 
   return (
     <div className="app-container">
+      {!isSecure && (
+        <div className="security-alert-bar" role="alert">
+          🚨 CRITICAL: DATA TAMPERING DETECTED! INCOMING INFORMATION IS UNVERIFIED.
+        </div>
+      )}
+      
       <header className="header">
         <div className="logo-container">
           <Activity color="var(--primary)" size={28} aria-hidden="true" />
           <div className="logo" role="heading" aria-level="1">VenueFlow</div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <div className={`security-badge ${isSecure ? 'safe' : 'compromised'}`}>
+            {isSecure ? '🛡️ Integrity Verified' : '⚠️ Unverified'}
+          </div>
           <button 
             className="accessibility-btn" 
             onClick={() => setIsAccessible(!isAccessible)}

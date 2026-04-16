@@ -1,41 +1,74 @@
 import { useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 
-// Empty string defaults to window.location (relative)
 const SOCKET_URL = '';
+// In a real app, this should be an environment variable
+const SYSTEM_SECRET = 'stadium-integrity-lock-24';
+
+/**
+ * Verify HMAC on the client side using Web Crypto API
+ */
+async function verifyData(payload, signature) {
+  try {
+    const encoder = new TextEncoder();
+    const keyData = encoder.encode(SYSTEM_SECRET);
+    const data = encoder.encode(JSON.stringify(payload));
+
+    const cryptoKey = await crypto.subtle.importKey(
+      'raw',
+      keyData,
+      { name: 'HMAC', hash: 'SHA-256' },
+      false,
+      ['verify']
+    );
+
+    // Convert hex signature back to bytes
+    const sigBytes = new Uint8Array(signature.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
+
+    return await crypto.subtle.verify(
+      'HMAC',
+      cryptoKey,
+      sigBytes,
+      data
+    );
+  } catch (err) {
+    console.error('Security Verification Error:', err);
+    return false;
+  }
+}
 
 export const useSocket = () => {
   const [data, setData] = useState({ crowdData: {}, waitTimes: {} });
   const [isConnected, setIsConnected] = useState(false);
+  const [isSecure, setIsSecure] = useState(true);
 
   useEffect(() => {
     const socket = io(SOCKET_URL);
 
-    const handleConnect = () => {
-      setIsConnected(true);
-      console.log('Connected to VenueFlow sync engine');
+    const handleVenueUpdate = async (envelope) => {
+      const { data: rawData, signature } = envelope;
+      
+      const isValid = await verifyData(rawData, signature);
+      
+      if (isValid) {
+        setData(rawData);
+        setIsSecure(true);
+      } else {
+        console.error('🚨 SECURITY ALERT: Unauthorized data modification detected!');
+        setIsSecure(false);
+        // Do not update the state with untrusted data
+      }
     };
 
-    const handleDisconnect = () => {
-      setIsConnected(false);
-      console.log('Disconnected from VenueFlow sync engine');
-    };
-
-    const handleVenueUpdate = (payload) => {
-      setData(payload);
-    };
-
-    socket.on('connect', handleConnect);
-    socket.on('disconnect', handleDisconnect);
+    socket.on('connect', () => setIsConnected(true));
+    socket.on('disconnect', () => setIsConnected(false));
     socket.on('venueUpdate', handleVenueUpdate);
 
     return () => {
-      socket.off('connect', handleConnect);
-      socket.off('disconnect', handleDisconnect);
       socket.off('venueUpdate', handleVenueUpdate);
       socket.disconnect();
     };
   }, []);
 
-  return { data, isConnected };
+  return { data, isConnected, isSecure };
 };

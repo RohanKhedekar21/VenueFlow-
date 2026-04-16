@@ -1,13 +1,19 @@
 const { getCrowdData, getWaitTimes } = require('../../services/dataService');
+const { signPayload } = require('../../services/securityService');
 
 const handleSocketEvents = (io) => {
   io.on('connection', (socket) => {
-    console.log('A user connected:', socket.id);
+    console.log('🛡️ Secure connection established:', socket.id);
     
-    // Send current state on connection
-    socket.emit('venueUpdate', { 
+    // Initial sync
+    const payload = { 
       crowdData: getCrowdData(), 
       waitTimes: getWaitTimes() 
+    };
+
+    socket.emit('venueUpdate', { 
+      data: payload,
+      signature: signPayload(payload)
     });
 
     socket.on('disconnect', () => {

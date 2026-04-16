@@ -24,8 +24,14 @@ const startSimulation = (io) => {
     }
     updateWaitTimes(newWaitTimes);
 
-    // Push new data to all connected clients
-    io.emit('venueUpdate', { crowdData: getCrowdData(), waitTimes: getWaitTimes() });
+    const { signPayload } = require('./securityService');
+    const payload = { crowdData: getCrowdData(), waitTimes: getWaitTimes() };
+
+    // Push new data to all connected clients with integrity signature
+    io.emit('venueUpdate', { 
+      data: payload,
+      signature: signPayload(payload)
+    });
     
   }, 5000);
 };
