@@ -9,7 +9,7 @@ env:
   PROJECT_ID: promptwars-492818
   REGION: us-central1
   SERVICE: venueflow
-  REPOSITORY: venueflow-repo
+  REPOSITORY: VenueFlow-
 
 jobs:
   test-backend:
