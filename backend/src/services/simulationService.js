@@ -1,5 +1,4 @@
 const { getCrowdData, getWaitTimes, updateCrowdData, updateWaitTimes } = require('./dataService');
-const { generateAIInsight } = require('./aiService');
 
 const startSimulation = (io) => {
   setInterval(async () => {
@@ -27,10 +26,6 @@ const startSimulation = (io) => {
 
     // Push new data to all connected clients
     io.emit('venueUpdate', { crowdData: getCrowdData(), waitTimes: getWaitTimes() });
-
-    // Generate and push AI predictive insights
-    const insight = await generateAIInsight(getCrowdData());
-    io.emit('aiInsight', { message: insight });
     
   }, 5000);
 };
