@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { useSocket } from './hooks/useSocket';
 import Map from './components/Map';
 import AmenitiesList from './components/AmenitiesList';
 import ParkingMap from './components/ParkingMap';
-import { Activity, Eye, Zap } from 'lucide-react';
+import { Activity, Eye } from 'lucide-react';
 
 function App() {
   const { data, isConnected } = useSocket();
@@ -20,11 +21,9 @@ function App() {
   }, [isAccessible]);
 
   useEffect(() => {
-    // Fetch static layout first
-    fetch('/api/venue')
-      .then(res => res.json())
-      .then(layout => setVenueLayout(layout))
-      .catch(err => console.error("Error fetching layout:", err));
+    axios.get('/api/venue')
+      .then(res => setVenueLayout(res.data))
+      .catch(err => console.error("Error loading layout:", err));
   }, []);
 
   return (
