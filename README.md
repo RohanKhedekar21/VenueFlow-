@@ -8,17 +8,18 @@ VenueFlow is a high-performance, resilient platform designed for stadium authori
 ---
 
 ## ⚡ Features
-- **📊 Live Heatmaps**: Real-time crowd density tracking for all stadium gates and concourses.
+- **📊 Google Maps Integration**: Real-time crowd density tracking on native Google Maps components via `@react-google-maps/api`.
+- **🚗 Smart Routing**: AI-optimized directions to the least congested stadium entrance using Google Cloud Directions API.
+- **🌉 Dynamic Config Bridge**: Zero-downtime, secure runtime injection of API keys. Secrets are never baked into Docker images.
 - **🛡️ Data Integrity**: Every packet is signed with HMAC-SHA256 to prevent misinformation and tampering.
-- **♿ Accessibility First**: Built-in high-contrast and large-text modes for inclusive fan experience.
-- **🚦 Smart Facilities**: Dynamic wait-time tracking for restrooms and food concessions.
-- **🚗 Parking Intelligence**: Real-time stall availability and entry-point management.
+- **♿ Accessibility First**: Built-in high-contrast and fully ARIA-compliant UI for an inclusive fan experience.
 
 ## 🛠️ Tech Stack
 - **Frontend**: React 19, Vite, Socket.io, Lucide-React.
-- **Backend**: Node.js & Express 5 (Hardenend with Helmet/Rate-Limit).
-- **Communication**: Real-time bi-directional WebSockets.
-- **Security**: SubtleCrypto-based digital signatures.
+- **Cloud Services**: Google Cloud Run, Google Maps JavaScript API, Firebase Analytics.
+- **Backend**: Node.js & Express 5 (Hardened with Helmet/Rate-Limit/CSP).
+- **Communication**: Throttled bi-directional WebSockets.
+- **Security**: SubtleCrypto-based digital signatures & strict CORS.
 
 ## 🚀 Quick Start
 
@@ -53,4 +54,4 @@ Detailed technical guides are available in the [docs/](./docs/) directory:
 - [⚙️ Operations & Deployment](./docs/OPERATIONS.md)
 
 ---
-*Built for the Google DeepMind Hackathon 2026. Prioritizing Stadium Safety & Fan Intelligence.*
+*Prioritizing Stadium Safety & Fan Intelligence since 2026.*
