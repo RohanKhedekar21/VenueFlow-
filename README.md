@@ -1,6 +1,8 @@
 # 🏟️ VenueFlow
 **Real-Time Stadium Crowd Management & Safety Intelligence**
 
+🔗 **Live Deployment**: [venueflow-364029198802.us-central1.run.app](https://venueflow-364029198802.us-central1.run.app)
+
 VenueFlow is a high-performance, resilient platform designed for stadium authorities to monitor crowd density, optimize facility wait times, and ensure fan safety through real-time data visualization and cryptographic integrity.
 
 ---

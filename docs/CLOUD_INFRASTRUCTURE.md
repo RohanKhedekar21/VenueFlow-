@@ -32,6 +32,7 @@ graph TD
 ### 1. Cloud Run (Compute)
 - **Service Name**: `venueflow`
 - **Region**: `us-central1`
+- **URL**: [https://venueflow-364029198802.us-central1.run.app](https://venueflow-364029198802.us-central1.run.app)
 - **Function**: Hosts the unified Node.js/Express backend and serves the React frontend.
 - **Scaling**: Configured for `0 to 100` instances. Automatically scales to zero when no fans are using the app to save costs.
 

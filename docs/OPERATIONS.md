@@ -6,6 +6,8 @@ This document is intended for the DevOps and Maintenance teams responsible for t
 
 VenueFlow is fully containerized and deploys automatically via GitHub Actions.
 
+🔗 **Service URL**: [https://venueflow-364029198802.us-central1.run.app](https://venueflow-364029198802.us-central1.run.app)
+
 ### Continuous Deployment Pattern:
 1.  **Trigger**: Every push to the `main` branch.
 2.  **Steps**: `Test` (Front/Back) -> `Build` (Docker) -> `Push` (Artifact Registry) -> `Deploy` (Cloud Run).
