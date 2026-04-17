@@ -30,6 +30,14 @@ describe('Backend Server Reliability Tests', () => {
     expect(res.body.zones.length).toBeGreaterThan(0);
   });
 
+  it('provides security configuration via the Config Bridge on /api/config', async () => {
+    const res = await request(app).get('/api/config');
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveProperty('googleMapsApiKey');
+    expect(res.body).toHaveProperty('firebaseApiKey');
+    expect(res.body).toHaveProperty('firebaseProjectId');
+  });
+
   it('pushes real-time queue states via WebSockets', async () => {
     return new Promise((resolve) => {
       ioClient.on('venueUpdate', (envelope) => {
