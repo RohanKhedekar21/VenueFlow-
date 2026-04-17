@@ -36,6 +36,8 @@ describe('Backend Server Reliability Tests', () => {
     expect(res.body).toHaveProperty('googleMapsApiKey');
     expect(res.body).toHaveProperty('firebaseApiKey');
     expect(res.body).toHaveProperty('firebaseProjectId');
+    expect(res.body).toHaveProperty('firebaseMessagingSenderId');
+    expect(res.body).toHaveProperty('firebaseAppId');
   });
 
   it('pushes real-time queue states via WebSockets', async () => {

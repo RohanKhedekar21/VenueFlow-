@@ -29,7 +29,9 @@ export const useConfig = () => {
           setConfig({
             googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY || "",
             firebaseApiKey: import.meta.env.VITE_FIREBASE_API_KEY || "",
-            firebaseProjectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "venueflow-prod"
+            firebaseProjectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "venueflow-prod",
+            firebaseMessagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "364029198802",
+            firebaseAppId: import.meta.env.VITE_FIREBASE_APP_ID || "1:364029198802:web:1106839feb2a2ad37bc80b"
           });
           setIsLoading(false);
         }

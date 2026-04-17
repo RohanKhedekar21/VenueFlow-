@@ -17,8 +17,8 @@ export const initFirebase = (config) => {
     authDomain:    `${config.firebaseProjectId}.firebaseapp.com`,
     projectId:     config.firebaseProjectId,
     storageBucket: `${config.firebaseProjectId}.appspot.com`,
-    messagingSenderId: "1234567890",
-    appId: "1:1234567890:web:abcdef123456",
+    messagingSenderId: config.firebaseMessagingSenderId,
+    appId:         config.firebaseAppId,
   };
 
   const app = initializeApp(firebaseConfig);

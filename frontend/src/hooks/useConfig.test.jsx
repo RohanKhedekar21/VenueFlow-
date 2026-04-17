@@ -14,7 +14,9 @@ describe('useConfig Hook', () => {
     const mockConfig = {
       googleMapsApiKey: 'test-maps-key',
       firebaseApiKey: 'test-fb-key',
-      firebaseProjectId: 'test-project'
+      firebaseProjectId: 'test-project',
+      firebaseMessagingSenderId: 'test-sender',
+      firebaseAppId: 'test-app'
     };
 
     axios.get.mockResolvedValueOnce({ data: mockConfig });

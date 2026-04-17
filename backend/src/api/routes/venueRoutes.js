@@ -14,9 +14,11 @@ router.get('/venue', (req, res) => {
 router.get('/config', (req, res) => {
   // Sources: Cloud Run Console env vars (production) or backend/.env (local dev)
   res.json({
-    googleMapsApiKey: process.env.VITE_GOOGLE_MAPS_API_KEY || process.env.GOOGLE_MAPS_API_KEY || "",
-    firebaseApiKey:   process.env.VITE_FIREBASE_API_KEY   || process.env.FIREBASE_API_KEY   || "",
+    googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY || "",
+    firebaseApiKey: process.env.FIREBASE_API_KEY || "",
     firebaseProjectId: process.env.FIREBASE_PROJECT_ID || "",
+    firebaseMessagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID || "",
+    firebaseAppId: process.env.FIREBASE_APP_ID || "",
   });
 });
 
