@@ -36,6 +36,21 @@ The application requires the following environment variables to be set in the Cl
 
 ---
 
+## 🌉 Runtime Configuration (Config Bridge)
+
+VenueFlow v2.0 uses a **Config Bridge** to manage application secrets dynamically via the `/api/config` endpoint. This allows you to update API keys without rebuilding the container.
+
+1.  **Supported Keys**:
+    *   `VITE_GOOGLE_MAPS_API_KEY` or `GOOGLE_MAPS_API_KEY`: Official Maps SDK key.
+    *   `VITE_FIREBASE_API_KEY` or `FIREBASE_API_KEY`: Firebase initialization key.
+    *   `FIREBASE_PROJECT_ID`: The GCP project ID for Firebase services.
+
+2.  **Management**:
+    - Manage these keys in the **Google Cloud Run Console** under the **Variables & Secrets** tab.
+    - After updating keys, you only need to **Restart** the Cloud Run service; a new Docker build is **NOT** required.
+
+---
+
 ## 🧪 Maintenance Tasks
 
 ### Simulation Tuning
