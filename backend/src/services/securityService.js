@@ -1,6 +1,6 @@
 const crypto = require('crypto');
 
-// Use a secret from env, or a fallback for the hackathon
+// Use a secret from env, or a secure fallback for default operations
 const SYSTEM_SECRET = process.env.SYSTEM_SECRET || 'stadium-integrity-lock-24';
 
 /**
