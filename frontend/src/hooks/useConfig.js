@@ -9,7 +9,7 @@ import axios from 'axios';
 export const useConfig = () => {
   const [config, setConfig] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error] = useState(null);
 
   useEffect(() => {
     let isMounted = true;
@@ -22,7 +22,7 @@ export const useConfig = () => {
           setIsLoading(false);
         }
       })
-      .catch(err => {
+      .catch(() => {
         console.warn("Config Bridge unavailable, falling back to local environment.");
         if (isMounted) {
           // Fallback to build-time vars if backend is unreachable or local
